@@ -1,3 +1,9 @@
+;format ELF32 executable 3 
+;segment readable executable
+;entry start
+
+;3 is for Linux 4 for hurd 11 for openbsd
+
 bits 32 
 section .text  
         align 4  
