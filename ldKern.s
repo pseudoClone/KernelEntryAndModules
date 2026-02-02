@@ -1,18 +1,11 @@
-;format ELF32 executable 3 
-;segment readable executable
-;entry start
+.section text
+.global _start
+_start:
+        la sp, stack_top
+        call kern_main
+1: j 1b ; don't know why people do this since, while(1) should never return, unless stack is exceeded
 
-;3 is for Linux 4 for hurd 11 for openbsd
-
-bits 32 
-section .text  
-        align 4  
-        dd 0x1BADB002  
-        dd 0x00   
-        ;dd - (0x1BADB002 + 0x00) 
-global start 
-        extern k_main  
-start:  
-        cli
-        call k_main  
-        hlt 
+.section bss
+.space 4096 ; stack size
+.global stack_top
+stack_top:
